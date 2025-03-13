@@ -1,0 +1,35 @@
+mat-toolbar {
+    background: #002b5c;
+    color: white;
+}
+
+.toolbar-spacer {
+    flex: 1 1 auto;
+}
+
+.add-employee-btn {
+    display: flex;
+    align-items: center;
+}
+
+.table-container {
+    position: relative;
+    min-height: 200px;
+    max-height: 400px;
+    overflow: auto;
+}
+
+@media (max-width: 768px) {
+    .add-employee-btn .btn-text {
+        display: none;
+    }
+      
+    .add-employee-btn {
+        padding: 8px;
+    }
+      
+    .add-employee-btn mat-icon {
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
