@@ -15,6 +15,9 @@ export class EmployeeService {
   private readonly _employees: WritableSignal<EmployeeResponse[]> = signal([]);
   readonly employees: Signal<EmployeeResponse[]> = this._employees.asReadonly();
 
+  private readonly _selectedEmployee: WritableSignal<EmployeeResponse | null> = signal(null);
+  readonly selectedEmployee: Signal<EmployeeResponse | null> = this._selectedEmployee.asReadonly();
+
   constructor() { }
 
   getEmployees(): void {
@@ -23,4 +26,11 @@ export class EmployeeService {
       .pipe(tap(employees => this._employees.set(employees)))
       .subscribe()
   }
+
+  getEmployeeById(id: string): void {
+    this.http
+      .get<EmployeeResponse>(`${this.apiUrl}/GetEmployeeById/${id}`)
+      .pipe(tap(employee => this._selectedEmployee.set(employee)))
+      .subscribe()
+  };
 }
