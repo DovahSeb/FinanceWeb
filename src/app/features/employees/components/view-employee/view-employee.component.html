@@ -1,0 +1,39 @@
+<div class="view-employee-container">
+    <h2 mat-dialog-title style="color: #002b5c; font-weight: bold; text-align: center;">Employee Details</h2>
+    @if (employee()){
+      <div class="employee-detail">
+        <label for="firstName">First Name:</label>
+        <span id="firstName">{{ employee()?.firstName }}</span>
+      </div>
+      <div class="employee-detail">
+        <label for="lastName">Last Name: </label>
+        <span id="lastName">{{ employee()?.lastName }}</span>
+      </div>
+      <div class="employee-detail">
+        <label for="dateOfBirth">Date of Birth: </label>
+        <span id="dateOfBirth">{{ employee()?.dateOfBirth | date:'mediumDate' }}</span>
+      </div>
+      <div class="employee-detail">
+        <label for="email">Email: </label>
+        <span id="email">{{ employee()?.email }}</span>
+      </div>
+      <div class="employee-detail">
+        <label for="dateJoined">Date Joined: </label>
+        <span id="dateJoined">{{ employee()?.dateJoined | date:'mediumDate' }}</span>
+      </div>
+      <div class="employee-detail">
+        <label for="department">Department: </label>
+        <span id="department">{{ employee()?.department }}</span>
+      </div>
+      <div class="employee-detail">
+        <label for="postTitle">Post Title: </label>
+        <span id="postTitle">{{ employee()?.postTitle }}</span>
+      </div>
+    }
+    @else {
+      <p>Loading employee details...</p>
+    }
+    <div class="actions">
+      <button mat-button (click)="closeDialog()">Close</button>
+    </div>
+  </div>

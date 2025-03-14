@@ -1,0 +1,28 @@
+.view-employee-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 16px;
+}
+  
+.employee-detail {
+    display: flex;
+    justify-content: flex-start;
+    margin: 8px 0;
+  
+    label {
+        font-weight: bold;
+        color: #002b5c;
+    }
+  
+    span {
+        color: #555;
+        margin-left: 4px;
+    }
+}
+  
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
