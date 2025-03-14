@@ -1,6 +1,5 @@
 <h3 mat-dialog-title style="color: #002b5c; font-weight: bold; text-align: center;">Edit Employee Details</h3>
 <form (ngSubmit)="updateEmployee()">
-  <mat-dialog-content>
     <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
       <mat-form-field style="flex: 1 1 48%;">
         <mat-label for="firstName">First Name</mat-label>
@@ -43,9 +42,8 @@
         </mat-select>
       </mat-form-field>
     </div>
-  </mat-dialog-content>
-  <mat-dialog-actions align="end">
+
     <button type="button" mat-button color="warn" (click)="close()">Close</button>
     <button type="submit" mat-button cdkFocusInitial>Save</button>
-  </mat-dialog-actions>
+
 </form>
