@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { DepartmentResponse } from '../interfaces/reference/IDepartment';
+import { PostTitleResponse } from '../interfaces/reference/IPostTitles';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,9 @@ export class ReferenceValueService {
   private readonly _departments: WritableSignal<DepartmentResponse[]> = signal([]);
   readonly departments: Signal<DepartmentResponse[]> = this._departments.asReadonly();
 
+  private readonly _postTitles: WritableSignal<PostTitleResponse[]> = signal([]);
+  readonly postTitles: Signal<PostTitleResponse[]> = this._postTitles.asReadonly();
+
   constructor(private http: HttpClient){}
 
   getDepartments(): void {
@@ -23,4 +27,10 @@ export class ReferenceValueService {
       .subscribe()
   };
   
+  getPostTitles(): void {
+    this.http
+      .get<PostTitleResponse[]>(`${this.apiUrl}/GetPostTitles`)
+      .pipe(tap(postTitles => this._postTitles.set(postTitles)))
+      .subscribe()
+  }
 }
