@@ -1,0 +1,51 @@
+<h3 mat-dialog-title style="color: #002b5c; font-weight: bold; text-align: center;">Edit Employee Details</h3>
+<form (ngSubmit)="updateEmployee()">
+  <mat-dialog-content>
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+      <mat-form-field style="flex: 1 1 48%;">
+        <mat-label for="firstName">First Name</mat-label>
+        <input matInput id="firstName" name="firstName" [(ngModel)]="this.employeeForm().firstName" required>
+      </mat-form-field>
+      <mat-form-field style="flex: 1 1 48%;">
+        <mat-label for="lastName">Last Name</mat-label>
+        <input matInput id="lastName" name="lastName" [(ngModel)]="this.employeeForm().lastName" required>
+      </mat-form-field>
+      <mat-form-field style="flex: 1 1 48%;">
+        <mat-label for="dateOfBirth">Date of Birth</mat-label>
+        <input matInput [matDatepicker]="dateOfBirthPicker" [max]="maxDate" id="dateOfBirth" name="dateOfBirth" [(ngModel)]="this.employeeForm().dateOfBirth" required>
+        <mat-datepicker-toggle matIconSuffix [for]="dateOfBirthPicker"></mat-datepicker-toggle>
+        <mat-datepicker #dateOfBirthPicker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field style="flex: 1 1 48%;">
+        <mat-label for="email">Email</mat-label>
+        <input matInput id="email" name="email" [(ngModel)]="this.employeeForm().email" required>
+      </mat-form-field>
+      <mat-form-field style="flex: 1 1 48%;">
+        <mat-label for="dateJoined">Date Joined</mat-label>
+        <input matInput [matDatepicker]="dateJoinedPicker" [max]="maxDate" id="dateJoined" name="dateJoined" [(ngModel)]="this.employeeForm().dateJoined" required>
+        <mat-datepicker-toggle matIconSuffix [for]="dateJoinedPicker"></mat-datepicker-toggle>
+        <mat-datepicker #dateJoinedPicker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field style="flex: 1 1 48%;">
+        <mat-label for="departmentId">Select Department</mat-label>
+        <mat-select id="departmentId" name="departmentId" [(ngModel)]="this.employeeForm().departmentId" required>
+          @for (department of departments(); track department.id) {
+            <mat-option [value]="department.id">{{department.name}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field style="flex: 1 1 48%;">
+        <mat-label for="postTitleId">Select Post Title</mat-label>
+        <mat-select id="postTitleId" name="postTitleId" [(ngModel)]="this.employeeForm().postTitleId" required>
+          @for (postTitle of postTitles(); track postTitle.id) {
+            <mat-option [value]="postTitle.id">{{postTitle.name}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button type="button" mat-button color="warn" (click)="close()">Close</button>
+    <button type="submit" mat-button cdkFocusInitial>Save</button>
+  </mat-dialog-actions>
+</form>

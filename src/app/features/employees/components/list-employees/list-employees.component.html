@@ -43,10 +43,10 @@
             <button mat-icon-button aria-label="View an employee" (click)="viewEmployee(element.id)">
                 <mat-icon color="primary">visibility</mat-icon>
             </button>
-            <button mat-icon-button aria-label="Edit employee information">
+            <button mat-icon-button aria-label="Edit employee information" [routerLink]="['../employee', element.id]">
                 <mat-icon color="accent">edit</mat-icon>
             </button>
-            <button mat-icon-button aria-label="Delete an employee">
+            <button mat-icon-button aria-label="Deactivate an employee">
                 <mat-icon color="warn">delete</mat-icon>
             </button>
         </td>

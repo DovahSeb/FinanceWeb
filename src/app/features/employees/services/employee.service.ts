@@ -27,7 +27,7 @@ export class EmployeeService {
       .subscribe()
   }
 
-  getEmployeeById(id: string): void {
+  getEmployeeById(id: number): void {
     this.http
       .get<EmployeeResponse>(`${this.apiUrl}/GetEmployeeById/${id}`)
       .pipe(tap(employee => this._selectedEmployee.set(employee)))
