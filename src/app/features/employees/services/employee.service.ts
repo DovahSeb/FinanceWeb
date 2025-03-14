@@ -2,7 +2,7 @@ import { inject, Injectable, Signal, signal, WritableSignal } from '@angular/cor
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { EmployeeResponse } from '../interfaces/IEmployee';
+import { EmployeeRequest, EmployeeResponse } from '../interfaces/IEmployee';
 
 @Injectable({
   providedIn: 'root'
@@ -33,4 +33,11 @@ export class EmployeeService {
       .pipe(tap(employee => this._selectedEmployee.set(employee)))
       .subscribe()
   };
+
+  updateEmployee(id: number, updatedEmployee: EmployeeRequest): void {
+    this.http
+      .put<EmployeeResponse>(`${this.apiUrl}/UpdateEmployee/${id}`, updatedEmployee)
+      .pipe(tap(employee => this._employees.update(currentEmployees => currentEmployees.map(e => e.id === employee.id ? employee : e))))
+      .subscribe()
+  }
 }
