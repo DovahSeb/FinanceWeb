@@ -1,7 +1,7 @@
 <mat-toolbar>
     <span style="font-weight: bold;">List of Employees</span>
     <span class="toolbar-spacer"></span>
-    <button class="add-employee-btn" style="color: #002b5c;" mat-raised-button>
+    <button class="add-employee-btn" style="color: #002b5c;" (click)="addEmployee()" mat-raised-button>
         <mat-icon>add</mat-icon>
         <span class="btn-text">Add Employee</span>
     </button>
@@ -46,5 +46,5 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons></mat-paginator>
 </div>
+<mat-paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons></mat-paginator>

@@ -20,7 +20,6 @@ import { ToastrService } from 'ngx-toastr';
 })
 
 export class EditEmployeeComponent {
-  
   private employeeService = inject(EmployeeService);
   private referenceService = inject(ReferenceValueService);
   private route = inject(ActivatedRoute);
@@ -31,7 +30,6 @@ export class EditEmployeeComponent {
   employee: Signal<EmployeeResponse | null>;
   departments: Signal<DepartmentResponse[]>;
   postTitles: Signal<PostTitleResponse[]>;
-
   employeeForm = signal<EmployeeRequest>({
     firstName: '',
     lastName: '',
@@ -44,19 +42,6 @@ export class EditEmployeeComponent {
 
   employeeId: number = -1;
   readonly maxDate = new Date();
-
-  isFormValid = computed(() => {
-    const form = this.employeeForm();
-    return (
-      form.firstName.trim() !== '' &&
-      form.lastName.trim() !== '' &&
-      form.dateOfBirth !== '' &&
-      form.email.trim() !== '' &&
-      form.dateJoined !== '' &&
-      form.departmentId > 0 &&
-      form.postTitleId > 0
-    );
-  });
 
   constructor(){
     this.employeeId = Number(this.route.snapshot.paramMap.get('id'));
@@ -121,6 +106,19 @@ export class EditEmployeeComponent {
   close(){
     this.router.navigate(['/employees']);
   }
+
+  private isFormValid = computed(() => {
+    const form = this.employeeForm();
+    return (
+      form.firstName.trim() !== '' &&
+      form.lastName.trim() !== '' &&
+      form.dateOfBirth !== '' &&
+      form.email.trim() !== '' &&
+      form.dateJoined !== '' &&
+      form.departmentId > 0 &&
+      form.postTitleId > 0
+    );
+  });
 
   private showValidationError(): void {
     this.toastr.error('Please fill in the required fields', 'Validation Error');
