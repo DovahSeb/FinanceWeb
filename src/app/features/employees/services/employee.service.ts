@@ -34,6 +34,13 @@ export class EmployeeService {
       .subscribe()
   };
 
+  addEmployee(newEmployee: EmployeeRequest): void {
+    this.http
+      .post<EmployeeResponse>(`${this.apiUrl}/CreateEmployee`, newEmployee)
+      .pipe(tap(addedEmployee => this._employees.update(currentEmployees => [...currentEmployees, addedEmployee])))
+      .subscribe()
+  }
+
   updateEmployee(id: number, updatedEmployee: EmployeeRequest): void {
     this.http
       .put<EmployeeResponse>(`${this.apiUrl}/UpdateEmployee/${id}`, updatedEmployee)
