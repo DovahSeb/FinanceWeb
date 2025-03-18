@@ -8,52 +8,43 @@
 </mat-toolbar>
 
 <div class="table-container">
-
-
-<table mat-table [dataSource]="employees()" class="mat-elevation-z8">
-  
-    <ng-container matColumnDef="firstName">
-        <th mat-header-cell *matHeaderCellDef> FIrst Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="lastName">
-        <th mat-header-cell *matHeaderCellDef> Last Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef> Email </th>
-        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="department">
-        <th mat-header-cell *matHeaderCellDef> Department </th>
-        <td mat-cell *matCellDef="let element"> {{element.department}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="postTitle">
-        <th mat-header-cell *matHeaderCellDef> Post Title </th>
-        <td mat-cell *matCellDef="let element"> {{element.postTitle}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Actions </th>
-        <td mat-cell *matCellDef="let element">
-            <button mat-icon-button aria-label="View an employee" (click)="viewEmployee(element.id)">
-                <mat-icon color="primary">visibility</mat-icon>
-            </button>
-            <button mat-icon-button aria-label="Edit employee information" [routerLink]="['../employee', element.id]">
-                <mat-icon color="accent">edit</mat-icon>
-            </button>
-            <button mat-icon-button aria-label="Deactivate an employee">
-                <mat-icon color="warn">delete</mat-icon>
-            </button>
-        </td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="firstName">
+            <th mat-header-cell *matHeaderCellDef> FIrst Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="lastName">
+            <th mat-header-cell *matHeaderCellDef> Last Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+        <ng-container matColumnDef="department">
+            <th mat-header-cell *matHeaderCellDef> Department </th>
+            <td mat-cell *matCellDef="let element"> {{element.department}} </td>
+        </ng-container>
+        <ng-container matColumnDef="postTitle">
+            <th mat-header-cell *matHeaderCellDef> Post Title </th>
+            <td mat-cell *matCellDef="let element"> {{element.postTitle}} </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button aria-label="View an employee" (click)="viewEmployee(element.id)">
+                    <mat-icon color="primary">visibility</mat-icon>
+                </button>
+                <button mat-icon-button aria-label="Edit employee information" [routerLink]="['../employee', element.id]">
+                    <mat-icon color="accent">edit</mat-icon>
+                </button>
+                <button mat-icon-button aria-label="Deactivate an employee">
+                    <mat-icon color="warn">delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons></mat-paginator>
 </div>
