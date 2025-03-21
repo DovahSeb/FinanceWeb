@@ -27,8 +27,6 @@ export class LoginComponent {
       return;
     }
 
-    this.authService.login(this.loginRequest).subscribe(() => {
-      this.toastr.success("Login Successful", "Success");
-    })
+    this.authService.login(this.loginRequest);
   }
 }
