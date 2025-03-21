@@ -24,17 +24,17 @@
 .welcome-section {
     flex: 1;
     padding: 1rem;
-}
-  
-.welcome-section h1 {
-    font-size: 2rem;
-    font-weight: bold;
-}
-  
-.welcome-section p {
-    margin-top: 1rem;
-    font-size: 1.2rem;
-    color: #d1e8ff;
+
+    h1 {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    p {
+        margin-top: 1rem;
+        font-size: 1.2rem;
+        color: #d1e8ff;
+    }
 }
   
 @media (max-width: 768px) {
@@ -45,13 +45,13 @@
   
     .welcome-section {
         text-align: center;
-    }
-  
-    .welcome-section h1 {
-        font-size: 1.8rem;
-    }
-  
-    .welcome-section p {
-        font-size: 1rem;
+
+        h1 {
+            font-size: 1.8rem;
+        }
+
+        p {
+            font-size: 1rem;
+        }
     }
 }
