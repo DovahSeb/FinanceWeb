@@ -14,15 +14,13 @@ import { HeaderComponent } from '../header/header.component';
   styleUrl: './sidenav.component.scss'
 })
 export class SidenavComponent implements AfterViewInit, OnDestroy {
-
-  @Output() logoutEvent = new EventEmitter<void>();
-
-  @ViewChild(MatSidenav)
-  sidenav!: MatSidenav;
-
   private destroy$ = new Subject<void>();
   private observer = inject(BreakpointObserver);
   private router = inject(Router);
+
+  @Output() logoutEvent = new EventEmitter<void>();
+  @ViewChild(MatSidenav)
+  sidenav!: MatSidenav;
 
   ngAfterViewInit() {
     this.observer
@@ -51,6 +49,10 @@ export class SidenavComponent implements AfterViewInit, OnDestroy {
           this.sidenav.close();
         }
       });
+  }
+
+  logout(){
+    this.logoutEvent.emit();
   }
 
   ngOnDestroy(): void {
