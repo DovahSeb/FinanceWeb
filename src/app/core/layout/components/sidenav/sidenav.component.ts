@@ -1,10 +1,10 @@
-import { Component, ViewChild, AfterViewInit, OnDestroy, inject, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnDestroy, inject, Output, EventEmitter, input } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { delay, Subject, takeUntil, filter } from 'rxjs';
-import { SideNavModules } from '../../modules/sidenav.module';
 import { MatSidenav } from '@angular/material/sidenav';
+import { delay, Subject, takeUntil, filter } from 'rxjs';
 import { HeaderComponent } from '../header/header.component';
+import { SideNavModules } from '../../modules/sidenav.module';
 
 @Component({
   selector: 'app-sidenav',
@@ -18,6 +18,7 @@ export class SidenavComponent implements AfterViewInit, OnDestroy {
   private observer = inject(BreakpointObserver);
   private router = inject(Router);
 
+  readonly userName = input<string>();
   @Output() logoutEvent = new EventEmitter<void>();
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
