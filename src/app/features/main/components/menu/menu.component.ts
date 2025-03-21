@@ -1,7 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../../../../core/services/auth/auth.service';
-import { ToastrService } from 'ngx-toastr';
 import { SidenavComponent } from '../../../../core/layout/components/sidenav/sidenav.component';
 import { ConfirmationDialogData, ConfirmationDialogComponent } from '../../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 
@@ -15,8 +14,17 @@ import { ConfirmationDialogData, ConfirmationDialogComponent } from '../../../..
 export class MenuComponent {
   private authService = inject(AuthService);
   private dialog = inject(MatDialog)
-  private toastr = inject(ToastrService)
-  
+
+  userName: Signal<string>;
+
+  constructor() {
+    this.userName = this.authService.userName;
+  }
+
+  ngOnInit() {
+    this.authService.getUserName();
+  }
+
   logout(): void {
     const dialogData: ConfirmationDialogData = {
       dialogTitle: 'Logout Confirmation',
