@@ -2,7 +2,7 @@ import { computed, inject, Injectable, signal, Signal } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap, throwError } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { LoginRequest } from '../../interfaces/auth/IAuth';
+import { LoginRequest, UserInfoResponse } from '../../interfaces/auth/IAuth';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
@@ -15,6 +15,9 @@ export class AuthService {
 
   private _isAuthenticated = signal(false);
   readonly isAuthenticated: Signal<boolean> = computed(() => this._isAuthenticated());
+
+  private _userName = signal('');
+  readonly userName: Signal<string> = computed(() => this._userName());
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -44,6 +47,7 @@ export class AuthService {
       tap(() => {
         this._isAuthenticated.set(false);
         this.clearAuthState();
+        this.clearUserName();
       }),
       catchError(() => {
         return throwError(() => new Error("Logout Error. Please try again later"));
@@ -51,6 +55,15 @@ export class AuthService {
     ).subscribe(() => {
       this.toastr.success("Logout Successful", "Success");
     });
+  }
+
+  getUserName() {
+    return this.http
+      .get<UserInfoResponse>(`${this.apiUrl}/manage/info`, this.httpOptions)
+      .subscribe(userInfo => {
+        this._userName.set(userInfo.email)
+        this.saveUserName();
+      });
   }
 
   saveAuthState() {
@@ -64,5 +77,13 @@ export class AuthService {
 
   clearAuthState() {
     localStorage.removeItem('isAuthenticated');
+  }
+
+  saveUserName() {
+    localStorage.setItem('userName', JSON.stringify(this._userName()));
+  }
+
+  clearUserName() {
+    localStorage.removeItem('userName');
   }
 }
