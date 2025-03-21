@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, computed, effect, inject, signal, S
 import { ActivatedRoute, Router } from '@angular/router';
 import { EditEmployeeModule } from '../../modules/edit-employee.module';
 import { EmployeeService } from '../../services/employee.service';
-import { ReferenceValueService } from '../../../../core/services/reference-value.service';
+import { ReferenceValueService } from '../../../../core/services/reference-value/reference-value.service';
 import { EmployeeRequest, EmployeeResponse } from '../../interfaces/IEmployee';
 import { DepartmentResponse } from '../../../../core/interfaces/reference/IDepartment';
 import { PostTitleResponse } from '../../../../core/interfaces/reference/IPostTitles';

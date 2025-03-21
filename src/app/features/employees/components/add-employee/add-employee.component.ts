@@ -3,7 +3,7 @@ import { DatePipe } from '@angular/common';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { EmployeeService } from '../../services/employee.service';
-import { ReferenceValueService } from '../../../../core/services/reference-value.service';
+import { ReferenceValueService } from '../../../../core/services/reference-value/reference-value.service';
 import { AddEmployeesModule } from '../../modules/add-employee.module';
 import { EmployeeRequest } from '../../interfaces/IEmployee';
 import { DepartmentResponse } from '../../../../core/interfaces/reference/IDepartment';

@@ -1,9 +1,9 @@
 import { Injectable, signal, Signal, WritableSignal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs';
-import { environment } from '../../../environments/environment';
-import { DepartmentResponse } from '../interfaces/reference/IDepartment';
-import { PostTitleResponse } from '../interfaces/reference/IPostTitles';
+import { environment } from '../../../../environments/environment';
+import { DepartmentResponse } from '../../interfaces/reference/IDepartment';
+import { PostTitleResponse } from '../../interfaces/reference/IPostTitles';
 
 @Injectable({
   providedIn: 'root'
