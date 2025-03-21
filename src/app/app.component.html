@@ -1,1 +1,6 @@
-<app-menu></app-menu>
+@if(!authService.isAuthenticated()){
+    <app-landing></app-landing>
+}
+@else if(authService.isAuthenticated()) {
+    <app-menu></app-menu>
+}

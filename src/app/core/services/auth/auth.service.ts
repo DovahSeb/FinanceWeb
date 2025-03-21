@@ -20,12 +20,13 @@ export class AuthService {
   };
 
   login(login: LoginRequest){
-    const url = `${this.apiUrl}/auth1/login?useCookies=true`;
+    const url = `${this.apiUrl}/auth/login?useCookies=true`;
     const body = login;
 
     return this.http.post(url, body, this.httpOptions).pipe(
       tap(() => {
         this._isAuthenticated.set(true);
+        this.saveAuthState();
       }),
       catchError(() => {
         return throwError(() => new Error("Login Error. Please try again later"))
