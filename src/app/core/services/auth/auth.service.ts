@@ -3,13 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap, throwError } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { LoginRequest } from '../../interfaces/auth/IAuth';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = environment.baseUrl;
+  private apiUrl = `${environment.baseUrl}/auth`;
   private http = inject(HttpClient);
+  private toastr = inject(ToastrService);
 
   private _isAuthenticated = signal(false);
   readonly isAuthenticated: Signal<boolean> = computed(() => this._isAuthenticated());
@@ -19,8 +21,8 @@ export class AuthService {
     withCredentials: true
   };
 
-  login(login: LoginRequest){
-    const url = `${this.apiUrl}/auth/login?useCookies=true`;
+  login(login: LoginRequest) {
+    const url = `${this.apiUrl}/login?useCookies=true`;
     const body = login;
 
     return this.http.post(url, body, this.httpOptions).pipe(
@@ -29,9 +31,26 @@ export class AuthService {
         this.saveAuthState();
       }),
       catchError(() => {
-        return throwError(() => new Error("Login Error. Please try again later"))
+        return throwError(() => new Error("Login Error. Please try again later"));
       })
-    )
+    ).subscribe(() => {
+      this.toastr.success("Login Successful", "Success");
+    });
+  }
+
+  logout() {
+    const body = {};
+    return this.http.post(`${this.apiUrl}/logout`, body, this.httpOptions).pipe(
+      tap(() => {
+        this._isAuthenticated.set(false);
+        this.clearAuthState();
+      }),
+      catchError(() => {
+        return throwError(() => new Error("Logout Error. Please try again later"));
+      })
+    ).subscribe(() => {
+      this.toastr.success("Logout Successful", "Success");
+    });
   }
 
   saveAuthState() {
@@ -41,5 +60,9 @@ export class AuthService {
   loadAuthState() {
     const isAuthenticated = JSON.parse(localStorage.getItem('isAuthenticated') || 'false');
     this._isAuthenticated.set(isAuthenticated);
+  }
+
+  clearAuthState() {
+    localStorage.removeItem('isAuthenticated');
   }
 }
