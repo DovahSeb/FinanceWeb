@@ -4,12 +4,13 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { delay, Subject, takeUntil, filter } from 'rxjs';
 import { HeaderComponent } from '../header/header.component';
+import { FooterComponent } from "../footer/footer.component";
 import { SideNavModules } from '../../modules/sidenav.module';
 
 @Component({
   selector: 'app-sidenav',
   standalone: true,
-  imports: [SideNavModules, HeaderComponent],
+  imports: [SideNavModules, HeaderComponent, FooterComponent],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss'
 })
