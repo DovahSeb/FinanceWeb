@@ -1,8 +1,16 @@
-mat-toolbar {
-    background: white;
-    color: #002b5c;
+.app-footer {
+    background: #002b5c;
+    color: white;
     width: auto;
     margin: 0 2rem;
     padding: 0.5rem;
     border-radius: 10px;
-}  
+    text-align: center;
+}
+  
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+}
