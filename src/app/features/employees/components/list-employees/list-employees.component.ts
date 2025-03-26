@@ -26,7 +26,9 @@ export class ListEmployeesComponent implements AfterViewInit {
 
   displayedColumns: string[] = ['firstName', 'lastName', 'email', 'department', 'postTitle', 'actions'];
   dataSource: MatTableDataSource<EmployeeResponse> = new MatTableDataSource<EmployeeResponse>();
-  employees: Signal<EmployeeResponse[]>
+  employees: Signal<EmployeeResponse[]>;
+  resultsLength = 0;
+  isLoadingResults = true;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -34,14 +36,12 @@ export class ListEmployeesComponent implements AfterViewInit {
     this.employees = this.employeeservice.employees;
     effect(() => {
       this.dataSource.data = this.employees();
+      this.isLoadingResults = false;
     });
   }
 
-  ngOnInit() {
-    this.employeeservice.getEmployees();
-  }
-
   ngAfterViewInit() {
+    this.employeeservice.getEmployees();
     this.dataSource.paginator = this.paginator;
   }
 
