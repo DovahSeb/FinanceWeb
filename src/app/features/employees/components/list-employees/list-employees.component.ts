@@ -8,13 +8,14 @@ import { ToastrService } from 'ngx-toastr';
 import { EmployeeService } from '../../services/employee.service';
 import { ViewEmployeeComponent } from '../view-employee/view-employee.component';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
+import { FilterComponent } from '../../../../shared/components/filter/filter.component';
 import { ListEmployeesModules } from '../../modules/list-employees.module';
 import { EmployeeRequest, EmployeeResponse } from '../../interfaces/IEmployee';
 
 @Component({
   selector: 'app-list-employees',
   standalone: true,
-  imports: [ListEmployeesModules, RouterLink],
+  imports: [ListEmployeesModules, RouterLink, FilterComponent],
   templateUrl: './list-employees.component.html',
   styleUrl: './list-employees.component.scss',
   providers: [DatePipe]
@@ -27,22 +28,37 @@ export class ListEmployeesComponent implements AfterViewInit {
   displayedColumns: string[] = ['firstName', 'lastName', 'email', 'department', 'postTitle', 'actions'];
   dataSource: MatTableDataSource<EmployeeResponse> = new MatTableDataSource<EmployeeResponse>();
   employees: Signal<EmployeeResponse[]>;
-  resultsLength = 0;
   isLoadingResults = true;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor() {
     this.employees = this.employeeservice.employees;
+
+    this.dataSource.filterPredicate = (data: EmployeeResponse, filter: string) => {
+      const fullName = `${data.firstName} ${data.lastName}`.toLowerCase();
+      return fullName.includes(filter);
+    };
+
     effect(() => {
       this.dataSource.data = this.employees();
       this.isLoadingResults = false;
     });
   }
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.employeeservice.getEmployees();
+  }
+
+  ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue;
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   viewEmployee(id: number): void {
