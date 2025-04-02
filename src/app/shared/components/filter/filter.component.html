@@ -1,0 +1,4 @@
+<mat-form-field>
+  <mat-label>Search</mat-label>
+  <input matInput (input)="applyFilter($event)" [value]="filterValue()" placeholder="Ex. John" />
+</mat-form-field>
