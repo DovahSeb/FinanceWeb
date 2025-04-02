@@ -17,5 +17,6 @@ export class AppComponent {
 
   ngOnInit(){
     this.authService.loadAuthState();
+    this.authService.loadUserName();
   }
 }

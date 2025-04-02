@@ -83,6 +83,11 @@ export class AuthService {
     localStorage.setItem('userName', JSON.stringify(this._userName()));
   }
 
+  loadUserName() {
+    const userName = JSON.parse(localStorage.getItem('userName') || '');
+    this._userName.set(userName);
+  }
+
   clearUserName() {
     localStorage.removeItem('userName');
   }
