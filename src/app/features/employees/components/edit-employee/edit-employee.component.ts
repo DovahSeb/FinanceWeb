@@ -70,6 +70,7 @@ export class EditEmployeeComponent {
       if (selectedEmployee) {
         this.employeeForm.set({
           firstName: selectedEmployee.firstName,
+          otherName: selectedEmployee.otherName,
           lastName: selectedEmployee.lastName,
           dateOfBirth: selectedEmployee.dateOfBirth,
           email: selectedEmployee.email,
@@ -111,6 +112,7 @@ export class EditEmployeeComponent {
     const form = this.employeeForm();
     return (
       form.firstName.trim() !== '' &&
+      form.otherName?.trim() !== '' &&
       form.lastName.trim() !== '' &&
       form.dateOfBirth !== '' &&
       form.email.trim() !== '' &&

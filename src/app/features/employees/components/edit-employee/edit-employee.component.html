@@ -6,6 +6,10 @@
         <input matInput id="firstName" name="firstName" [(ngModel)]="this.employeeForm().firstName" required>
       </mat-form-field>
       <mat-form-field style="flex: 1 1 48%;">
+        <mat-label for="otherName">Other Name</mat-label>
+        <input matInput id="otherName" name="otherName" [(ngModel)]="this.employeeForm().otherName" required>
+      </mat-form-field>
+      <mat-form-field style="flex: 1 1 48%;">
         <mat-label for="lastName">Last Name</mat-label>
         <input matInput id="lastName" name="lastName" [(ngModel)]="this.employeeForm().lastName" required>
       </mat-form-field>
