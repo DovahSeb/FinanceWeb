@@ -61,8 +61,15 @@ export class AddEmployeeComponent {
       dateJoined: this.datePipe.transform(form.dateJoined, 'yyyy-MM-dd') ?? '',
     }));
 
-    this.employeeService.addEmployee(this.employeeForm());
-    this.dialogRef.close(this.employeeForm());
+    this.employeeService.addEmployee(this.employeeForm()).subscribe({
+      next: newEmployee => {
+        this.toastr.success(
+          `Employee: ${newEmployee.firstName} ${newEmployee.lastName} successfully added`,
+          'Success'
+        );
+      }
+    });
+    this.dialogRef.close();
   }
 
   closeDialog(): void {

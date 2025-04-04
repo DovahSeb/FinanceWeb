@@ -21,19 +21,18 @@ import { EmployeeRequest, EmployeeResponse } from '../../interfaces/IEmployee';
   providers: [DatePipe]
 })
 export class ListEmployeesComponent implements AfterViewInit {
-  private employeeservice = inject(EmployeeService);
+  employeeService = inject(EmployeeService);
   private dialog = inject(MatDialog);
   private toastr = inject(ToastrService);
 
   displayedColumns: string[] = ['firstName', 'lastName', 'email', 'department', 'postTitle', 'actions'];
   dataSource: MatTableDataSource<EmployeeResponse> = new MatTableDataSource<EmployeeResponse>();
   employees: Signal<EmployeeResponse[]>;
-  isLoadingResults = true;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor() {
-    this.employees = this.employeeservice.employees;
+    this.employees = this.employeeService.employees;
 
     this.dataSource.filterPredicate = (data: EmployeeResponse, filter: string) => {
       const fullName = `${data.firstName} ${data.lastName}`.toLowerCase();
@@ -42,12 +41,11 @@ export class ListEmployeesComponent implements AfterViewInit {
 
     effect(() => {
       this.dataSource.data = this.employees();
-      this.isLoadingResults = false;
     });
   }
 
   ngOnInit() {
-    this.employeeservice.getEmployees();
+    this.employeeService.getEmployees().subscribe()
   }
 
   ngAfterViewInit() {
@@ -72,18 +70,9 @@ export class ListEmployeesComponent implements AfterViewInit {
   }
 
   addEmployee(): void {
-    const dialogRef = this.dialog.open(AddEmployeeComponent, {
+    this.dialog.open(AddEmployeeComponent, {
       height: 'auto',
       width: '600px',
-    });
-
-    dialogRef.afterClosed().subscribe((newEmployee: EmployeeRequest) => {
-      if(newEmployee) {
-        this.toastr.success(
-          `Employee: ${newEmployee.firstName} ${newEmployee.lastName} successfully added`,
-          'Success'
-        );
-      }
     });
   }
 

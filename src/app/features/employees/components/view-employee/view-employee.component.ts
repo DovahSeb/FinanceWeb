@@ -23,7 +23,7 @@ export class ViewEmployeeComponent {
 
   constructor(){
     this.employee = this.employeeService.selectedEmployee;
-    this.employeeService.getEmployeeById(this.dialogData.id);
+    this.employeeService.getEmployeeById(this.dialogData.id).subscribe();
   }
 
   closeDialog(): void{

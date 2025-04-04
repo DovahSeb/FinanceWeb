@@ -97,11 +97,14 @@ export class EditEmployeeComponent {
       dateJoined: this.datePipe.transform(form.dateJoined, 'yyyy-MM-dd') ?? '',
     }));
 
-    this.employeeService.updateEmployee(this.employeeId, this.employeeForm());
-    this.toastr.success(
-      `Employee: ${this.employeeForm().firstName} ${this.employeeForm().lastName} successfully updated`,
-      'Success'
-    );
+    this.employeeService.updateEmployee(this.employeeId, this.employeeForm()).subscribe({
+      next: employee => {
+        this.toastr.success(
+          `Employee: ${employee.firstName} ${employee.lastName} successfully updated`,
+          'Success'
+        );
+      }
+    });
   }
 
   close(){
