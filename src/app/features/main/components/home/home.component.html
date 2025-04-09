@@ -1,0 +1,53 @@
+<mat-card class="card-container">
+    <mat-card-content>
+      <div class="landing-intro">
+        <p class="intro-text">
+          This system is developed for the <span class="highlight">Human Resource Department of the Ministry of Finance, National Planning, and Trade (MoFNPT).</span>
+          It aims to centralize and streamline HR operations by offering secure access to employee data.
+          <br /><br />
+          <strong class="highlight">Note:</strong> The Leave Management Module is currently under development and will be available soon.
+        </p>
+      </div>
+  
+      <div class="features-section">
+        <h3>Current Capabilities</h3>
+        <div class="features">
+          <mat-card class="feature-card">
+            <mat-card-header>
+              <mat-card-title>Employee Records</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p>View and manage active employee records across all departments within MoFNPT.</p>
+            </mat-card-content>
+          </mat-card>
+  
+          <mat-card class="feature-card">
+            <mat-card-header>
+              <mat-card-title>Secure Data Access</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p>Only authorized HR staff can access and update employee information.</p>
+            </mat-card-content>
+          </mat-card>
+  
+          <mat-card class="feature-card">
+            <mat-card-header>
+              <mat-card-title>User-Friendly Interface</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p>Designed with simplicity and efficiency in mind for a better user experience.</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+  
+      <div class="extra-text">
+        <p>Begin managing employee data by clicking below.</p>
+      </div>
+    </mat-card-content>
+  
+    <mat-card-actions>
+      <button mat-raised-button class="login-btn" color="primary" [routerLink]="['/employees']">Go to Employee Records</button>
+    </mat-card-actions>
+  </mat-card>
+  
